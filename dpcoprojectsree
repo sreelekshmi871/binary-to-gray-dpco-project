@@ -1,0 +1,188 @@
+# LTspice Digital Logic Circuit Simulation
+
+## 1. Project Overview
+
+This project demonstrates a digital logic circuit simulated using
+**LTspice**. Four pulse voltage sources are used as digital inputs, and
+the logic-gate network produces corresponding output waveforms.
+
+The circuit is analyzed using transient analysis for **16 ms**.
+
+## 2. Software Used
+
+-   LTspice
+-   Windows
+
+## 3. Input Signals
+
+The circuit uses four pulse voltage sources:
+
+  Input   Pulse Source
+  ------- -----------------------------
+  V1      `PULSE(0 5 0m 1m 1m 2m 8m)`
+  V2      `PULSE(0 5 2m 1m 1m 2m 8m)`
+  V3      `PULSE(0 5 4m 1m 1m 2m 8m)`
+  V4      `PULSE(0 5 6m 1m 1m 2m 8m)`
+
+The pulse sources generate different timing patterns for the four input
+signals.
+
+## 4. Circuit Components
+
+The circuit contains:
+
+-   Four pulse voltage sources: **V1, V2, V3, V4**
+-   Inverter stages for generating complementary signals
+-   Logic gates for combining the input and complementary signals
+-   Four output stages
+-   Ground connections
+-   Transient-analysis directive
+
+## 5. Working Principle
+
+The circuit works by applying four time-varying digital input signals to
+the logic-gate network.
+
+### Step 1 --- Input generation
+
+The four voltage sources V1, V2, V3 and V4 generate pulse signals.
+
+Each source changes between logic levels according to its PULSE
+definition. The delay and pulse period are different for each source, so
+different combinations of HIGH and LOW inputs occur during the 16 ms
+simulation.
+
+### Step 2 --- Complementary signals
+
+The input signals are applied to inverter gates.
+
+An inverter produces the complement of its input:
+
+``` text
+Input = 0  →  Output = 1
+Input = 1  →  Output = 0
+```
+
+Therefore, both the original and complemented versions of the required
+inputs are available for the following logic stages.
+
+### Step 3 --- Logic-gate operation
+
+The original and complemented signals are connected to the logic gates.
+
+Each logic gate checks its input conditions and produces a HIGH or LOW
+output according to its logic function.
+
+For an AND gate:
+
+``` text
+All inputs HIGH → Output HIGH
+Any input LOW   → Output LOW
+```
+
+The different gate combinations therefore respond to different
+combinations of the four input signals.
+
+### Step 4 --- Output generation
+
+The outputs of the logic-gate stages are connected to the final output
+nodes.
+
+The final outputs change between approximately:
+
+``` text
+0 V → Logic LOW
+1 V → Logic HIGH
+```
+
+The output waveforms can be observed using the LTspice waveform viewer.
+
+### Step 5 --- Transient simulation
+
+The directive:
+
+``` text
+.tran 16m
+```
+
+runs the circuit for 16 ms.
+
+During this period, LTspice calculates the voltage at each circuit node
+and displays the corresponding digital waveforms.
+
+## 6. Simulation Flow
+
+The complete working flow can be summarized as:
+
+``` text
+Pulse Sources
+     ↓
+Four Digital Inputs
+     ↓
+Inverter / Complementary Signals
+     ↓
+Logic Gates
+     ↓
+Output Stages
+     ↓
+Y1, Y2, Y3, Y4
+     ↓
+Waveform Viewer
+```
+
+## 7. Waveform Observation
+
+The waveform viewer shows the input and output signals as square-wave
+digital signals.
+
+The important observations are:
+
+-   The input signals change at different time intervals.
+-   The inverter outputs are complementary to their corresponding
+    inputs.
+-   The logic-gate outputs change according to the input combinations.
+-   The output signals remain within the digital LOW/HIGH voltage
+    levels.
+-   The complete response is observed over 0--16 ms.
+
+## 8. How to Run the Simulation
+
+1.  Open the LTspice schematic.
+
+2.  Verify V1, V2, V3 and V4.
+
+3.  Check that all voltage sources have ground connections.
+
+4.  Verify the inverter and logic-gate connections.
+
+5.  Confirm the simulation directive:
+
+    ``` text
+    .tran 16m
+    ```
+
+6.  Click the **Run** button.
+
+7.  Select the required input and output wires/nodes.
+
+8.  Observe the waveforms in the LTspice waveform viewer.
+
+## 9. Expected Result
+
+The simulation should produce clear digital waveforms for the input and
+output nodes.
+
+The four pulse sources create changing input combinations, and the
+logic-gate network responds to these combinations. The output waveforms
+therefore change according to the implemented logic circuit.
+
+## 10. Conclusion
+
+This project demonstrates the working of a digital logic circuit using
+four pulse voltage sources and logic gates in LTspice. The input pulses
+provide controlled digital signals, inverter stages generate
+complementary signals, and the logic gates process the signals to
+produce the required outputs.
+
+Transient analysis makes it possible to observe the complete
+input-to-output behavior over a **16 ms** interval.
